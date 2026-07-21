@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_stmt_get_result($stmt);
     $admin = mysqli_fetch_assoc($result);
 
-    
+
     if ($admin && $password === $admin['password']) {
         // Regenerate session ID cegah session fixation
         session_regenerate_id(true);
@@ -28,4 +28,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Username atau password salah";
     }
 }
-?>

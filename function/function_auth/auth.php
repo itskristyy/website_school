@@ -12,7 +12,7 @@ $dir_path  = strtolower(str_replace('\\', '/', __DIR__));
 $web_path  = str_replace($doc_root, '', $dir_path);
 $login_url = $protocol . '://' . $host . $web_path . '/login.php';
 
-if (!isset ($_SESSION['admin_id'])) {
+if (!isset($_SESSION['admin_id'])) {
     header("Location: $login_url");
     exit;
 }
@@ -25,6 +25,5 @@ if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time'] > $timeo
     session_destroy();
     header("Location: $login_url?expired=1");
     exit;
-} 
+}
 $_SESSION['login_time'] = time();
-?>
