@@ -1,0 +1,65 @@
+/* --- 1. Variabel warna & font, biar gampang dipanggil ulang --- */
+:root {
+  --skn-primary: #001026; /* navy tua: teks judul, border, footer */
+  --skn-secondary: #235eac; /* biru: link, badge, aksen */
+  --skn-amber: #ffb000; /* kuning: tombol CTA */
+  --skn-bg: #faf9fc; /* putih tulang: background halaman */
+  --skn-muted: #44474e; /* abu-abu: teks deskripsi */
+  --skn-surface-high: #e9e7eb; /* abu muda: kotak placeholder gambar */
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Public Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+body {
+  background-color: var(--skn-bg);
+  color: var(--skn-primary);
+  font-family: var(--font-body);
+}
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* --- 2. Scroll halus pas klik menu navbar (#section) --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px; /* biar section gak ketutup navbar fixed */
+}
+
+/* --- 4. Tombol dengan sudut kepotong diagonal (ciri khas desain) --- */
+.clip-diag {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%
+  );
+}
+
+/* --- 5. Efek hover tombol: geser dikit + bayangan kotak --- */
+.btn-shadow {
+  transition: all 0.15s ease;
+}
+.btn-shadow:hover {
+  box-shadow: 4px 4px 0px 0px var(--skn-secondary);
+  transform: translate(-2px, -2px);
+}
+
+/* --- 6. Kotak placeholder pengganti gambar (galeri, foto berita, dll) --- */
+.img-placeholder {
+  background-color: var(--skn-surface-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--skn-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
