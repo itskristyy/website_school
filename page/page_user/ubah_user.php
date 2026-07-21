@@ -1,6 +1,8 @@
 <?php
 include "../../function/connect.php";
 
+require '../../function/function_auth/auth.php';
+
 $id_user = $_GET['id_user'];
 
 $get_data = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$id_user'");
