@@ -43,6 +43,16 @@
                     <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link" href="#ppdb">PPDB</a></li>
                     <li class="nav-item"><a class="nav-link" href="#guestbook">Kontak</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Direktori
+                        </a>
+                        <ul class="dropdown-menu rounded-0 shadow border-0" style="border-top: 4px solid var(--skn-primary) !important;">
+                            <li><a class="dropdown-item font-mono small" href="page/direktori/direktori_guru.php">Data Guru</a></li>
+                            <li><a class="dropdown-item font-mono small" href="page/direktori/direktori_siswa.php">Data Siswa</a></li>
+                            <li><a class="dropdown-item font-mono small" href="page/direktori/direktori_alumni.php">Data Alumni</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <a href="login.php"
                     class="btn btn-outline-dark font-mono small rounded-0 clip-diag mb-2 mb-lg-0">Admin</a>
@@ -274,7 +284,7 @@
                 <?php
                 include_once './function/connect.php';
                 $query_berita = mysqli_query($koneksi, "SELECT * FROM tb_berita ORDER BY created_at DESC, id_berita DESC LIMIT 5");
-                
+
                 if (mysqli_num_rows($query_berita) > 0) {
                     // Fetch the very first article (highlighted on the left)
                     $first_berita = mysqli_fetch_array($query_berita);
@@ -282,16 +292,23 @@
                     <!-- Berita utama (kiri) -->
                     <div class="col-12 col-lg-5">
                         <div class="border p-1 bg-white mb-3" style="border-color: var(--skn-primary) !important;">
-                            <img src="<?php echo htmlspecialchars($first_berita['url_image']); ?>" alt="<?php echo htmlspecialchars($first_berita['judul_berita']); ?>" class="w-100 object-fit-cover" style="aspect-ratio: 4/3;">
+                            <img src="<?php echo htmlspecialchars($first_berita['url_image']); ?>"
+                                alt="<?php echo htmlspecialchars($first_berita['judul_berita']); ?>"
+                                class="w-100 object-fit-cover" style="aspect-ratio: 4/3;">
                         </div>
                         <div class="d-flex align-items-center gap-2 mb-2">
                             <span class="font-mono small text-white px-2 text-uppercase"
                                 style="background-color: var(--skn-secondary);"><?php echo htmlspecialchars($first_berita['kategori_berita']); ?></span>
-                            <span class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($first_berita['created_at'])); ?></span>
+                            <span
+                                class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($first_berita['created_at'])); ?></span>
                         </div>
-                        <h3 class="font-headline fs-4 fw-bold mb-2" style="color: var(--skn-primary);"><?php echo htmlspecialchars($first_berita['judul_berita']); ?></h3>
-                        <p class="text-muted mb-2"><?php echo substr(htmlspecialchars($first_berita['deskripsi_berita']), 0, 150) . (strlen($first_berita['deskripsi_berita']) > 150 ? '...' : ''); ?></p>
-                        <a href="<?php echo htmlspecialchars($first_berita['link_berita']); ?>" class="font-mono fw-bold text-decoration-none" style="color: var(--skn-secondary);">BACA
+                        <h3 class="font-headline fs-4 fw-bold mb-2" style="color: var(--skn-primary);">
+                            <?php echo htmlspecialchars($first_berita['judul_berita']); ?></h3>
+                        <p class="text-muted mb-2">
+                            <?php echo substr(htmlspecialchars($first_berita['deskripsi_berita']), 0, 150) . (strlen($first_berita['deskripsi_berita']) > 150 ? '...' : ''); ?>
+                        </p>
+                        <a href="<?php echo htmlspecialchars($first_berita['link_berita']); ?>"
+                            class="font-mono fw-bold text-decoration-none" style="color: var(--skn-secondary);">BACA
                             SELENGKAPNYA &rarr;</a>
                     </div>
 
@@ -304,14 +321,18 @@
                                 ?>
                                 <div class="col-12 col-md-6">
                                     <div class="border p-1 bg-white mb-2" style="border-color: var(--skn-primary) !important;">
-                                        <img src="<?php echo htmlspecialchars($row['url_image']); ?>" alt="<?php echo htmlspecialchars($row['judul_berita']); ?>" class="w-100 object-fit-cover" style="aspect-ratio:16/9;">
+                                        <img src="<?php echo htmlspecialchars($row['url_image']); ?>"
+                                            alt="<?php echo htmlspecialchars($row['judul_berita']); ?>"
+                                            class="w-100 object-fit-cover" style="aspect-ratio:16/9;">
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
                                         <span class="font-mono small border px-1 text-uppercase"
                                             style="border-color: var(--skn-primary) !important; color: var(--skn-primary);">[<?php echo htmlspecialchars($row['kategori_berita']); ?>]</span>
-                                        <span class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($row['created_at'])); ?></span>
+                                        <span
+                                            class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($row['created_at'])); ?></span>
                                     </div>
-                                    <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);"><?php echo htmlspecialchars($row['judul_berita']); ?></h4>
+                                    <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);">
+                                        <?php echo htmlspecialchars($row['judul_berita']); ?></h4>
                                     <a href="#" class="font-mono small fw-bold text-decoration-none"
                                         style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
                                 </div>
