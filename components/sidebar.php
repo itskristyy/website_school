@@ -40,6 +40,45 @@
                 </ul>
             </div>
         </li>
+        <!-- Dropdown Menu / Submenu -->
+        <li class="nav-item">
+            <a class="nav-link text-white dropdown-toggle d-flex align-items-center gap-2 rounded-0 border-start border-4 border-transparent" href="#" data-bs-toggle="collapse"
+                data-bs-target="#guru-collapse" aria-expanded="false">
+                <i class="bi bi-people"></i> Guru
+            </a>
+            <div class="collapse" id="guru-collapse">
+                <ul class="nav flex-column ms-4 mt-2 gap-1 border-start" style="border-color: rgba(255,255,255,0.2) !important;">
+                    <li><a href="../dashboard/tambah_guru.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Tambah Guru</a></li>
+                    <li><a href="../dashboard/data_guru.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Data Guru</a></li>
+                </ul>
+            </div>
+        </li>
+        <!-- Dropdown Menu / Submenu -->
+        <li class="nav-item">
+            <a class="nav-link text-white dropdown-toggle d-flex align-items-center gap-2 rounded-0 border-start border-4 border-transparent" href="#" data-bs-toggle="collapse"
+                data-bs-target="#siswa-collapse" aria-expanded="false">
+                <i class="bi bi-people"></i> Siswa
+            </a>
+            <div class="collapse" id="siswa-collapse">
+                <ul class="nav flex-column ms-4 mt-2 gap-1 border-start" style="border-color: rgba(255,255,255,0.2) !important;">
+                    <li><a href="../dashboard/tambah_siswa.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Tambah Siswa</a></li>
+                    <li><a href="../dashboard/data_siswa.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Data Siswa</a></li>
+                </ul>
+            </div>
+        </li>
+        <!-- Dropdown Menu / Submenu -->
+        <li class="nav-item">
+            <a class="nav-link text-white dropdown-toggle d-flex align-items-center gap-2 rounded-0 border-start border-4 border-transparent" href="#" data-bs-toggle="collapse"
+                data-bs-target="#alumni-collapse" aria-expanded="false">
+                <i class="bi bi-people"></i> Alumni
+            </a>
+            <div class="collapse" id="alumni-collapse">
+                <ul class="nav flex-column ms-4 mt-2 gap-1 border-start" style="border-color: rgba(255,255,255,0.2) !important;">
+                    <li><a href="../dashboard/tambah_alumni.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Tambah Alumni</a></li>
+                    <li><a href="../dashboard/data_alumni.php" class="nav-link py-1 px-3 text-white" style="color: rgba(255,255,255,.7) !important;">Data Alumni</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
     <hr style="border-color: rgba(255,255,255,0.2);">
     <div class="dropdown">
