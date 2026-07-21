@@ -1,5 +1,5 @@
 <?php
-include './function/connect.php';
+include '../connect.php';
 
 $judul_berita = $_POST['judul_berita'];
 $url_image = $_POST['url_image'];
@@ -12,7 +12,7 @@ $sql = "INSERT INTO tb_berita (judul_berita, url_image, deskripsi_berita, katego
                         VALUES ('$judul_berita', '$url_image', '$deskripsi_berita', '$kategori_berita', '$created_at', '$updated_at')";
 $result = mysqli_query($koneksi, $sql);
 if ($result) {
-    header("Location: ../../index.php");
+    header("Location: ../../page/dashboard/data_berita.php");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }

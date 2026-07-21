@@ -1,5 +1,5 @@
 <?php
-include './function/connect.php';
+include '../connect.php';
 
 // import data
 $id_berita = $_GET['id_berita'];
@@ -15,7 +15,7 @@ $sql = mysqli_query($koneksi, "UPDATE tb_berita
                               WHERE id_berita='$id_berita'");
 
 if ($sql) {
-    header("Location: ../../index.php?msg=berhasil");
+    header("Location: ../../page/dashboard/data_berita.php?msg=berhasil");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
 }
