@@ -11,6 +11,13 @@ require '../../function/function_auth/auth.php';
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
@@ -19,7 +26,11 @@ require '../../function/function_auth/auth.php';
         <?php require '../../components/sidebar.php'; ?>
 
         <!-- Main Content -->
-        <div class="container-fluid p-4">
+        <div class="container-fluid p-4 p-md-5" style="background-color: var(--skn-bg);">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <h1 class="font-headline fw-bold m-0" style="color: var(--skn-primary);">Data Berita</h1>
+                <div class="flex-grow-1 border-top" style="border-color: var(--skn-secondary) !important;"></div>
+            </div>
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <?php
@@ -39,12 +50,10 @@ require '../../function/function_auth/auth.php';
                                     <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['judul_berita']); ?></h5>
                                     <p class="card-text text-secondary flex-grow-1"><?php echo htmlspecialchars($row['deskripsi_berita']); ?></p>
                                     
-                                    <div class="d-flex gap-2 mt-3">
-                                        <a href="../page_berita/ubah_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn btn-warning btn-sm px-4">Edit</a>
-                                        <a href="../../function/function_berita/delete_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn btn-danger btn-sm px-4" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">Hapus</a>
-                                    </div>
-                                    <div class="d-flex gap-2 mt-3">
-                                        <a href="<?php echo htmlspecialchars($row['link_berita']); ?>" class="btn btn-primary btn-sm px-4">Baca Selengkapnya</a>
+                                    <div class="d-flex flex-wrap gap-2 mt-4">
+                                        <a href="../page_berita/ubah_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn fw-bold font-mono clip-diag btn-shadow text-uppercase px-3 py-1" style="background-color: var(--skn-amber); color: var(--skn-primary); font-size: 0.8rem;">Edit</a>
+                                        <a href="../../function/function_berita/delete_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn fw-bold font-mono btn-outline-dark rounded-0 text-uppercase px-3 py-1" style="font-size: 0.8rem;" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">Hapus</a>
+                                        <a href="<?php echo htmlspecialchars($row['link_berita']); ?>" class="btn fw-bold font-mono btn-outline-dark rounded-0 text-uppercase px-3 py-1" style="font-size: 0.8rem;">Selengkapnya <i class="bi bi-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

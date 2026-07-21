@@ -11,6 +11,13 @@ require '../../function/function_auth/auth.php';
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
@@ -19,9 +26,10 @@ require '../../function/function_auth/auth.php';
         <?php require '../../components/sidebar.php'; ?>
 
         <!-- Main Content -->
-        <div class="container-fluid p-4">
-            <div class="mb-4">
-                <h1 class="font-bold text-3xl">Guestbook Display</h1>
+        <div class="container-fluid p-4 p-md-5" style="background-color: var(--skn-bg);">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <h1 class="font-headline fw-bold m-0" style="color: var(--skn-primary);">Guestbook Display</h1>
+                <div class="flex-grow-1 border-top" style="border-color: var(--skn-secondary) !important;"></div>
             </div>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">

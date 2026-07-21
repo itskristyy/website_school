@@ -11,6 +11,13 @@ require '../../function/function_auth/auth.php';
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
@@ -19,11 +26,14 @@ require '../../function/function_auth/auth.php';
         <?php require '../../components/sidebar.php'; ?>
 
         <!-- Main Content -->
-        <div class="container-fluid p-4">
-            <div class="card shadow-sm border-0">
+        <div class="container-fluid p-4 p-md-5" style="background-color: var(--skn-bg);">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <h1 class="font-headline fw-bold m-0" style="color: var(--skn-primary);">Tambah User Baru</h1>
+                <div class="flex-grow-1 border-top" style="border-color: var(--skn-secondary) !important;"></div>
+            </div>
+            <div class="card shadow-sm border-0 rounded-0" style="border-top: 4px solid var(--skn-primary) !important;">
                 <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                    <h2 class="h4 mb-0">Tambah User Baru</h2>
-                    <p class="text-muted small">Masukkan detail informasi pengguna di bawah ini.</p>
+                    <p class="font-mono small text-muted">Masukkan detail informasi pengguna di bawah ini.</p>
                 </div>
                 <div class="card-body p-4">
                     <form action="../../function/function_user/add_user.php" method="POST">
@@ -42,9 +52,9 @@ require '../../function/function_auth/auth.php';
                             <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
                         </div>
                         
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary px-4">Simpan User</button>
-                            <button type="reset" class="btn btn-light px-4">Reset</button>
+                        <div class="d-flex gap-3 mt-5">
+                            <button type="submit" class="btn fw-bold font-mono clip-diag btn-shadow text-uppercase px-4" style="background-color: var(--skn-amber); color: var(--skn-primary);">Simpan User</button>
+                            <button type="reset" class="btn btn-outline-dark fw-bold font-mono rounded-0 text-uppercase px-4">Reset</button>
                         </div>
                     </form>
                 </div>
