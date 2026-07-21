@@ -1,6 +1,6 @@
 <?php
 session_start();
-require './function/connect.php';
+require __DIR__ . '/../connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
@@ -22,9 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $admin['username'];
         $_SESSION['login_time'] = time();
 
-        header('Location: ../../dashboard.php');
+        header('Location: ../../page/dashboard/dashboard.php');
         exit;
     } else {
-        $error = "Username atau password salah";
+        $_SESSION['login_error'] = "Username atau password salah";
+        header('Location: ../../login.php');
+        exit;
     }
+} else {
+    header('Location: ../../login.php');
+    exit;
 }

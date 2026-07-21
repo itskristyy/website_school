@@ -8,7 +8,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $protocol  = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 $host      = $_SERVER['HTTP_HOST'];
 $doc_root  = strtolower(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']));
-$dir_path  = strtolower(str_replace('\\', '/', __DIR__));
+// Ambil path root project (2 tingkat ke atas dari folder function_auth)
+$project_dir = dirname(dirname(__DIR__));
+$dir_path  = strtolower(str_replace('\\', '/', $project_dir));
 $web_path  = str_replace($doc_root, '', $dir_path);
 $login_url = $protocol . '://' . $host . $web_path . '/login.php';
 

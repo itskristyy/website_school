@@ -17,7 +17,8 @@ $row_data = mysqli_fetch_array($get_data);
 </head>
 
 <body>
-
+<!-- Sidebar -->
+        <?php require '../../components/sidebar.php'; ?>
 </body>
 
 </html>
