@@ -1,156 +1,127 @@
-# Dokumentasi Teknis & Implementasi - Web Sekolah
-
-Projek ini adalah sebuah portal web sekolah sederhana berbasis PHP Native dan MySQL yang digunakan untuk menguji logika dasar database (*Logic Test*) serta menyediakan fungsionalitas CRUD (*Create, Read, Update, Delete*) untuk tiga fitur utama: **User (Pengguna/Admin)**, **Berita**, dan **Guestbook (Buku Tamu)**.
-
----
-
-## 1. STRUKTUR DATABASE
-
-Projek ini menggunakan database MySQL bernama `db_school` dengan 3 tabel utama:
-
-### A. Tabel `tb_user`
-Digunakan untuk menyimpan informasi admin atau pengguna sistem.
-- `id_user` (INT, Primary Key, Auto Increment): ID unik pengguna.
-- `username` (VARCHAR(400)): Username untuk login/identifikasi.
-- `nip` (INT): Nomor Induk Pegawai.
-- `password` (VARCHAR(40)): Password yang dienkripsi menggunakan MD5.
-
-### B. Tabel `tb_berita`
-Digunakan untuk menyimpan data berita sekolah.
-- `id_berita` (INT, Primary Key, Auto Increment): ID unik berita.
-- `judul_berita` (VARCHAR(255)): Judul berita.
-- `url_image` (VARCHAR(900)): URL eksternal gambar berita.
-- `deskripsi_berita` (TEXT): Isi detail berita.
-- `kategori_berita` (ENUM): Kategori berita (`prestasi`, `pengumuman`, `artikel`, `fasilitas`, `lainnya`).
-- `created_at` (TIMESTAMP): Waktu berita pertama kali dibuat.
-- `updated_at` (TIMESTAMP): Waktu berita terakhir kali diperbarui.
-
-### C. Tabel `tb_guestbook`
-Digunakan untuk menampung pesan atau testimoni dari pengunjung.
-- `id_message` (INT, Primary Key, Auto Increment): ID unik pesan.
-- `email` (VARCHAR(400)): Email pengirim.
-- `nama` (VARCHAR(500)): Nama pengirim.
-- `message` (VARCHAR(500)): Isi pesan dari pengunjung.
-- `createdAt` (VARCHAR(50)): Tanggal pengiriman pesan dengan format `dd-mm-yyyy` (WIB).
+<div align="center">
+  <h1>🏫 Sistem Informasi Web Sekolah Skanifo</h1>
+  <p>Sistem Informasi Manajemen Portal Sekolah Berbasis Web dengan PHP Native dan MySQL</p>
+</div>
 
 ---
 
-## 2. STRUKTUR DIREKTORI PROJEK
+## 📖 Deskripsi Projek
+
+**Web Sekolah Skanifo** adalah sebuah portal informasi dan sistem manajemen sekolah (*School Management System*) sederhana namun komprehensif. Dibangun menggunakan arsitektur **PHP Native** dan **MySQL**, aplikasi ini memisahkan secara jelas antara **Halaman Publik (Frontend)** untuk pengunjung dan **Panel Admin (Backend Dashboard)** untuk pengelola. 
+
+Sistem ini didesain secara khusus untuk mengelola data operasional sekolah dengan antarmuka yang modern, bersih, dan responsif.
+
+---
+
+## 🚀 Fitur Utama (Key Features)
+
+### 🌍 1. Halaman Publik (Frontend)
+- **Landing Page Interaktif**: Beranda, profil sekolah, dan program keahlian.
+- **Direktori Terintegrasi**: Publikasi data spesifik untuk Guru, Siswa, dan Alumni dalam bentuk *Card UI* yang modern.
+- **Portal Berita & Pengumuman**: Menampilkan pembaruan kegiatan dan berita sekolah.
+- **Buku Tamu (Guestbook)**: Fasilitas interaksi bagi pengunjung untuk mengirim pesan.
+
+### 🔒 2. Panel Admin (Backend Dashboard)
+- **Sistem Autentikasi**: Proteksi panel admin menggunakan Login (Enkripsi password MD5).
+- **CRUD Terpusat**: Fungsionalitas *Create, Read, Update, Delete* penuh untuk mengelola:
+  - Data Tenaga Pendidik (Guru)
+  - Data Peserta Didik (Siswa)
+  - Data Lulusan (Alumni)
+  - Data Publikasi Berita
+  - Manajemen Pengguna (Admin)
+- **Desain Sidebar Dinamis**: Navigasi panel yang efisien berbasis *collapse menu*.
+
+---
+
+## 🛠️ Teknologi yang Digunakan (Tech Stack)
+
+| Kategori | Teknologi | Deskripsi |
+| :--- | :--- | :--- |
+| **Backend Core** | `PHP 8.x` | Logika pemrosesan aplikasi dan manajemen form |
+| **Database** | `MySQL` / `MariaDB` | Relational Database Management System (RDBMS) |
+| **Frontend Framework** | `Bootstrap 5.3` | Framework responsif berbasis komponen CDN |
+| **Design System** | `Skanifo UI` | Kustomisasi variabel `--skn-primary`, `--skn-amber` |
+| **Tipografi & Ikon** | `Google Fonts` & `Bootstrap Icons` | Space Grotesk, IBM Plex Mono, Public Sans |
+
+---
+
+## 🗄️ Skema Database (Database Schema)
+
+Database **`db_school`** memiliki 5 tabel relasional yang diatur sebagai berikut:
+
+### 1. Data Manajemen (*Management Data*)
+| Tabel | Primary Key | Deskripsi Kolom |
+| :--- | :--- | :--- |
+| **`tb_user`** | `id_user` | `username` (Login), `nip` (NIP Admin), `password` (MD5 Hash) |
+| **`tb_berita`** | `id_berita` | `judul_berita`, `url_image`, `deskripsi_berita`, `kategori_berita`, `link_berita`, `created_at`, `updated_at` |
+| **`tb_guestbook`**| `id_message` | `email`, `nama`, `message`, `createdAt` |
+
+### 2. Data Direktori (*Directory Data*)
+| Tabel | Primary Key | Deskripsi Kolom |
+| :--- | :--- | :--- |
+| **`tb_guru`** | `id_guru` | `nama_guru`, `guru_jurusan`, `nip` |
+| **`tb_siswa`**| `id_siswa` | `nama_siswa`, `siswa_jurusan`, `nipd` |
+| **`tb_alumni`**| `id_alumni`| `nama_alumni`, `alumni_jurusan`, `tahun_lulus` |
+
+---
+
+## 📂 Struktur Direktori (Directory Architecture)
+
+Projek ini menerapkan pemisahan konsep MVC (*Model-View-Controller*) ringan secara terstruktur:
 
 ```text
-web_sekolah/
-│
-├── function/                   # Berisi semua logika backend (PHP)
-│   ├── connect.php             # Koneksi database utama
-│   │
-│   ├── function_berita/        # Logic CRUD Berita
-│   │   ├── add_berita.php
-│   │   ├── delete_berita.php
-│   │   └── edit_berita.php
-│   │
-│   ├── function_guestbook/     # Logic Guestbook
-│   │   └── add_message.php
-│   │
-│   └── function_user/          # Logic CRUD User
-│       ├── add_user.php
-│       ├── delete_user.php
-│       └── edit_user.php
-│
-├── page/                       # Halaman formulir edit/ubah data
-│   ├── page_berita/
-│   │   └── ubah_berita.php     # Form edit berita
-│   └── page_user/
-│       └── ubah_user.php       # Form edit user
-│
-├── index.php                   # Halaman utama (Dashboard & Form Test)
-├── db_school.sql               # Backup database MySQL
-└── readme.md                   # Dokumentasi Projek
+website_school/
+├── assets/                     # Aset Statis
+│   ├── css/style.css           # Token desain Skanifo UI
+│   └── js/main.js              # Interaktivitas kustom
+├── components/                 # Reusable UI (Sidebar)
+├── function/                   # Backend Logic (Controller & Model)
+│   ├── connect.php             # Jembatan Database
+│   ├── function_auth/          # Logika Login & Session
+│   ├── function_guru/          # Logika Pemrosesan CRUD Guru
+│   └── (function_lainnya)      # ... (Siswa, Alumni, Berita, User, dsb.)
+├── page/                       # Lapisan Tampilan (View)
+│   ├── dashboard/              # Halaman Dashboard Tertutup (Admin)
+│   ├── direktori/              # Halaman Publik Spesifik
+│   └── page_(entitiy)/         # Halaman Form Ubah/Edit Spesifik
+├── index.php                   # Entry Point / Halaman Utama
+└── login.php                   # Portal Autentikasi Admin
 ```
 
 ---
 
-## 3. DOKUMENTASI LOGIKA TEKNIS (BACKEND LOGIC)
+## ⚙️ Panduan Instalasi (Installation Guide)
 
-### A. Koneksi Database (`function/connect.php`)
-Menghubungkan aplikasi PHP dengan server MySQL lokal menggunakan ekstensi `mysqli`.
-- Menggunakan parameter: host (`localhost`), username (`root`), password (`""` / kosong), dan nama database (`db_school`).
-- Jika koneksi gagal, sistem akan menghentikan eksekusi program dan menampilkan pesan error.
+Untuk menjalankan aplikasi ini di lingkungan lokal Anda, ikuti instruksi instalasi berikut:
 
-### B. Modul User (Pengguna)
-1. **Tambah User (`function/function_user/add_user.php`)**:
-   - Menerima input `username`, `nip`, dan `password` via method `POST`.
-   - Mengenkripsi password menggunakan algoritma `md5()`.
-   - Melakukan `INSERT` ke tabel `tb_user`.
-   - Setelah berhasil, mengarahkan pengguna kembali ke `index.php`.
-2. **Hapus User (`function/function_user/delete_user.php`)**:
-   - Mengambil parameter `id_user` via method `GET` dari URL.
-   - Menjalankan perintah `DELETE FROM tb_user WHERE id_user = '$id_user'`.
-   - Melakukan redirect ke `index.php` dengan parameter status kiriman pesan (`?msg=berhasil` atau `?msg=gagal`).
-3. **Ubah User (`page/page_user/ubah_user.php` & `function/function_user/edit_user.php`)**:
-   - `ubah_user.php` mengambil data user berdasarkan `id_user` (dari `GET`) untuk ditampilkan di dalam input form sebagai *default value*.
-   - Saat form dikirim, data baru beserta `id` dikirim ke `edit_user.php`.
-   - `edit_user.php` melakukan enkripsi ulang password dengan `md5()` lalu mengeksekusi query `UPDATE`.
+### 1. Kebutuhan Sistem (*Prerequisites*)
+* Pastikan Anda telah menginstal **Laragon**, **XAMPP**, atau paket server Apache/Nginx sejenis.
+* Diperlukan PHP versi >= 8.0 dan server database MySQL.
 
-### C. Modul Berita
-1. **Tambah Berita (`function/function_berita/add_berita.php`)**:
-   - Menerima `judul_berita`, `url_image`, `deskripsi_berita`, dan `kategori_berita`.
-   - Menyimpan tanggal saat ini (`Y-m-d`) pada kolom `created_at` dan `updated_at`.
-   - Melakukan query `INSERT`.
-2. **Hapus Berita (`function/function_berita/delete_berita.php`)**:
-   - Menghapus baris data berdasarkan `id_berita` yang dikirim lewat URL (`GET`).
-3. **Ubah Berita (`page/page_berita/ubah_berita.php` & `function/function_berita/edit_berita.php`)**:
-   - Mengambil data lama berdasarkan `id_berita` untuk ditampilkan pada form edit berita.
-   - Form mengarah ke `edit_berita.php` yang menjalankan query `UPDATE tb_berita SET ... WHERE id_berita = '$id_berita'`.
+### 2. Langkah Setup
+1. **Kloning/Salin Repositori**
+   Letakkan *folder* projek ini (`website_school`) ke dalam direktori root server lokal Anda.
+   * *Laragon*: `C:\laragon\www\website_school`
+   * *XAMPP*: `C:\xampp\htdocs\website_school`
 
-### D. Modul Guestbook (Buku Tamu)
-1. **Tambah Pesan (`function/function_guestbook/add_message.php`)**:
-   - Menetapkan zona waktu server ke `Asia/Jakarta` (`date_default_timezone_set`).
-   - Mengambil tanggal saat pesan berhasil dikirim dengan format `dd-mm-yyyy` menggunakan `date('d-m-Y')`.
-   - Melakukan query `INSERT` untuk menyimpan data pengirim beserta pesan dan waktu kirim ke `tb_guestbook`.
-   - Mengarahkan kembali ke `index.php`.
+2. **Inisialisasi Database**
+   * Buka *Database Client* Anda (phpMyAdmin, DBeaver, atau HeidiSQL).
+   * Buat database baru dan beri nama **`db_school`**.
+   * Lakukan impor data (`Import`) dari file **`db_school (1).sql`** (atau `db_school.sql` jika tersedia).
+
+3. **Konfigurasi Akses Database**
+   Buka file `function/connect.php`. Sesuaikan kredenial dengan server lokal Anda.
+   ```php
+   $host = "localhost";
+   $user = "root";       // Ganti jika username DB Anda berbeda
+   $pass = "";           // Ganti jika DB Anda menggunakan password
+   $db   = "db_school";
+   ```
+
+4. **Jalankan Aplikasi**
+   Buka browser web Anda dan navigasikan ke alamat URL lokal Anda:
+   * **Halaman Publik**: `http://localhost/website_school/`
+   * **Panel Admin**: `http://localhost/website_school/login.php`
 
 ---
-
-## 4. DOKUMENTASI IMPLEMENTASI (FRONTEND & DISPLAY)
-
-Fokus utama frontend pada projek ini berada di file `index.php` yang menggunakan CSS Utility Framework **Tailwind CSS** via CDN.
-
-### A. Form Input & Pengiriman Data
-- Semua form menggunakan method `POST` dan diarahkan ke file logika masing-masing di dalam folder `function/`.
-- Validasi dasar menggunakan atribut HTML5 `required` pada input field.
-- Pilihan kategori berita diimplementasikan menggunakan elemen `<select>` dengan opsi yang sesuai dengan tipe data `ENUM` di database.
-
-### B. Tampilan Data Berita (Card Grid Layout)
-- Data berita ditampilkan di bagian bawah halaman secara dinamis dalam bentuk layout kartu (*card*).
-- Menggunakan Tailwind Grid System: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`.
-- Data gambar diambil langsung dari `url_image` yang dimasukkan pada database dan diatur agar responsif serta rapi (`w-full h-48 object-cover`).
-- Setiap card dilengkapi dengan tombol aksi "Edit Berita" dan "Hapus Berita".
-
-### C. Tampilan Data User dan Guestbook
-- User dan Guestbook ditampilkan dalam format tabel HTML standar dengan kelas batas border (`border-collapse`, `border-b`) dari Tailwind.
-- Baris tabel di-generate menggunakan perulangan PHP `while` dari hasil query database.
-
----
-
-## 5. PANDUAN INSTALASI & MENJALANKAN PROJEK
-
-Ikuti langkah-langkah berikut untuk menjalankan projek di komputer lokal Anda:
-
-### Prasyarat
-- Web Server Lokal (sangat direkomendasikan menggunakan **Laragon** atau **XAMPP**).
-- PHP Versi 8.0 ke atas.
-- MySQL / MariaDB database server.
-
-### Langkah-Langkah Setup
-1. **Copy Projek**: Letakkan folder `web_sekolah` ke dalam direktori root server lokal Anda:
-   - Jika menggunakan Laragon: `C:\laragon\www\web_sekolah`
-   - Jika menggunakan XAMPP: `C:\xampp\htdocs\web_sekolah`
-2. **Import Database**:
-   - Buka **phpMyAdmin** atau software database client Anda (seperti HeidiSQL / DBeaver).
-   - Buat database baru dengan nama `db_school`.
-   - Import file sql yang berada di `c:\laragon\www\web_sekolah\db_school.sql` ke dalam database `db_school` tersebut.
-3. **Konfigurasi Database**:
-   - Jika Anda memiliki konfigurasi username atau password database yang berbeda dari default (User: `root`, Pass: `""`), sesuaikan konfigurasinya pada file `function/connect.php`.
-4. **Jalankan Aplikasi**:
-   - Jalankan server Apache dan MySQL di Laragon/XAMPP Anda.
-   - Buka browser dan akses alamat: `http://localhost/web_sekolah/index.php` atau domain lokal Laragon Anda (misal `http://web_sekolah.test`).
+*Dibuat untuk keperluan sistem informasi digital sekolah Skanifo.* 🚀
