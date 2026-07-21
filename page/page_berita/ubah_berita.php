@@ -66,6 +66,10 @@ $row_data = mysqli_fetch_array($get_data);
                                 ?>
                             </select>
                         </div>
+                        <div class="mb-4">
+                            <label for="link_berita" class="form-label fw-semibold">Link Berita</label>
+                            <input type="text" class="form-control" name="link_berita" id="link_berita" required value="<?php echo htmlspecialchars($row_data['link_berita']); ?>"></input>
+                        </div>
 
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-warning px-4">Update Berita</button>

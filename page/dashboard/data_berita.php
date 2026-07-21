@@ -43,6 +43,9 @@ require '../../function/function_auth/auth.php';
                                         <a href="../page_berita/ubah_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn btn-warning btn-sm px-4">Edit</a>
                                         <a href="../../function/function_berita/delete_berita.php?id_berita=<?php echo $row['id_berita']; ?>" class="btn btn-danger btn-sm px-4" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">Hapus</a>
                                     </div>
+                                    <div class="d-flex gap-2 mt-3">
+                                        <a href="<?php echo htmlspecialchars($row['link_berita']); ?>" class="btn btn-primary btn-sm px-4">Baca Selengkapnya</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

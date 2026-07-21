@@ -57,6 +57,12 @@ require '../../function/function_auth/auth.php';
                             </select>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="link_berita" class="form-label fw-semibold">link Berita</label>
+                            <input type="text" class="form-control" name="link_berita" id="link_berita"
+                                placeholder="Masukkan link berita" required>
+                        </div>
+
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary px-4">Simpan Berita</button>
                             <button type="reset" class="btn btn-light px-4">Reset</button>

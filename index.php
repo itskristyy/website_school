@@ -271,87 +271,60 @@
             </div>
 
             <div class="row g-5">
-
-                <!-- Berita utama (kiri) -->
-                <div class="col-12 col-lg-5">
-                    <div class="border p-1 bg-white mb-3" style="border-color: var(--skn-primary) !important;">
-                        <div class="img-placeholder" style="aspect-ratio: 4/3;">[FOTO_UTAMA]</div>
+                <?php
+                include_once './function/connect.php';
+                $query_berita = mysqli_query($koneksi, "SELECT * FROM tb_berita ORDER BY created_at DESC, id_berita DESC LIMIT 5");
+                
+                if (mysqli_num_rows($query_berita) > 0) {
+                    // Fetch the very first article (highlighted on the left)
+                    $first_berita = mysqli_fetch_array($query_berita);
+                    ?>
+                    <!-- Berita utama (kiri) -->
+                    <div class="col-12 col-lg-5">
+                        <div class="border p-1 bg-white mb-3" style="border-color: var(--skn-primary) !important;">
+                            <img src="<?php echo htmlspecialchars($first_berita['url_image']); ?>" alt="<?php echo htmlspecialchars($first_berita['judul_berita']); ?>" class="w-100 object-fit-cover" style="aspect-ratio: 4/3;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="font-mono small text-white px-2 text-uppercase"
+                                style="background-color: var(--skn-secondary);"><?php echo htmlspecialchars($first_berita['kategori_berita']); ?></span>
+                            <span class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($first_berita['created_at'])); ?></span>
+                        </div>
+                        <h3 class="font-headline fs-4 fw-bold mb-2" style="color: var(--skn-primary);"><?php echo htmlspecialchars($first_berita['judul_berita']); ?></h3>
+                        <p class="text-muted mb-2"><?php echo substr(htmlspecialchars($first_berita['deskripsi_berita']), 0, 150) . (strlen($first_berita['deskripsi_berita']) > 150 ? '...' : ''); ?></p>
+                        <a href="<?php echo htmlspecialchars($first_berita['link_berita']); ?>" class="font-mono fw-bold text-decoration-none" style="color: var(--skn-secondary);">BACA
+                            SELENGKAPNYA &rarr;</a>
                     </div>
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="font-mono small text-white px-2"
-                            style="background-color: var(--skn-secondary);">PRESTASI</span>
-                        <span class="font-mono small text-muted">2024.05.20</span>
+
+                    <!-- Grid berita (kanan) -->
+                    <div class="col-12 col-lg-7">
+                        <div class="row g-4">
+                            <?php
+                            // Loop for the remaining articles (up to 4)
+                            while ($row = mysqli_fetch_array($query_berita)) {
+                                ?>
+                                <div class="col-12 col-md-6">
+                                    <div class="border p-1 bg-white mb-2" style="border-color: var(--skn-primary) !important;">
+                                        <img src="<?php echo htmlspecialchars($row['url_image']); ?>" alt="<?php echo htmlspecialchars($row['judul_berita']); ?>" class="w-100 object-fit-cover" style="aspect-ratio:16/9;">
+                                    </div>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <span class="font-mono small border px-1 text-uppercase"
+                                            style="border-color: var(--skn-primary) !important; color: var(--skn-primary);">[<?php echo htmlspecialchars($row['kategori_berita']); ?>]</span>
+                                        <span class="font-mono small text-muted"><?php echo date('Y.m.d', strtotime($row['created_at'])); ?></span>
+                                    </div>
+                                    <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);"><?php echo htmlspecialchars($row['judul_berita']); ?></h4>
+                                    <a href="#" class="font-mono small fw-bold text-decoration-none"
+                                        style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                    <h3 class="font-headline fs-4 fw-bold mb-2" style="color: var(--skn-primary);">Juara Umum Lomba
-                        Kompetensi Siswa (LKS) Tingkat Provinsi 2024</h3>
-                    <p class="text-muted mb-2">Tim Skanifo berhasil meraih predikat Juara Umum setelah memenangkan 5
-                        medali emas di berbagai bidang keahlian teknologi dan industri...</p>
-                    <a href="#" class="font-mono fw-bold text-decoration-none" style="color: var(--skn-secondary);">BACA
-                        SELENGKAPNYA &rarr;</a>
-                </div>
-
-                <!-- Grid berita (kanan) -->
-                <div class="col-12 col-lg-7">
-                    <div class="row g-4">
-
-                        <div class="col-12 col-md-6">
-                            <div class="img-placeholder mb-2"
-                                style="aspect-ratio:16/9; border:1px solid var(--skn-primary);">[FOTO_1]</div>
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="font-mono small border px-1"
-                                    style="border-color: var(--skn-primary) !important;">[BENGKEL]</span>
-                                <span class="font-mono small text-muted">2024.05.15</span>
-                            </div>
-                            <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);">Workshop
-                                Pengelasan Industri Bersama PT PINDAD</h4>
-                            <a href="#" class="font-mono small fw-bold text-decoration-none"
-                                style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="img-placeholder mb-2"
-                                style="aspect-ratio:16/9; border:1px solid var(--skn-primary);">[FOTO_2]</div>
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="font-mono small border px-1"
-                                    style="border-color: var(--skn-primary) !important;">[KULINER]</span>
-                                <span class="font-mono small text-muted">2024.05.12</span>
-                            </div>
-                            <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);">Seni Pastry
-                                Modern: Masterclass dari Chef Bintang Lima</h4>
-                            <a href="#" class="font-mono small fw-bold text-decoration-none"
-                                style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="img-placeholder mb-2"
-                                style="aspect-ratio:16/9; border:1px solid var(--skn-primary);">[FOTO_3]</div>
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="font-mono small border px-1"
-                                    style="border-color: var(--skn-primary) !important;">[INFRA]</span>
-                                <span class="font-mono small text-muted">2024.05.08</span>
-                            </div>
-                            <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);">Upgrade
-                                Infrastruktur Server Lab Komputer Terintegrasi</h4>
-                            <a href="#" class="font-mono small fw-bold text-decoration-none"
-                                style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="img-placeholder mb-2"
-                                style="aspect-ratio:16/9; border:1px solid var(--skn-primary);">[FOTO_4]</div>
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="font-mono small border px-1"
-                                    style="border-color: var(--skn-primary) !important;">[MARITIM]</span>
-                                <span class="font-mono small text-muted">2024.05.02</span>
-                            </div>
-                            <h4 class="font-headline fs-6 fw-bold mb-1" style="color: var(--skn-primary);">Simulasi
-                                Navigasi Kapal di Selat Malaka bagi Siswa Nautika</h4>
-                            <a href="#" class="font-mono small fw-bold text-decoration-none"
-                                style="color: var(--skn-secondary);">BACA SELENGKAPNYA &rarr;</a>
-                        </div>
-
-                    </div>
-                </div>
+                    <?php
+                } else {
+                    echo "<div class='col-12'><p class='text-muted text-center'>Belum ada berita yang dipublikasikan.</p></div>";
+                }
+                ?>
             </div>
         </section>
 
