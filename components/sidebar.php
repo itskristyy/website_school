@@ -54,7 +54,7 @@
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="function/function_auth/logout.php">Sign out</a></li>
+            <li><a class="dropdown-item" href="../../function/function_auth/logout.php">Sign out</a></li>
         </ul>
     </div>
 </div>
