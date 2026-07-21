@@ -1,5 +1,5 @@
 <?php
-include '../connect.php';
+include './function/connect.php';
 
 $judul_berita = $_POST['judul_berita'];
 $url_image = $_POST['url_image'];

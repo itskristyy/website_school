@@ -1,5 +1,5 @@
 <?php
-include '../connect.php';
+include './function/connect.php';
 
 $username = $_POST['username'];
 $nip = $_POST['nip'];

@@ -1,5 +1,5 @@
  <?php
-    include '../connect.php';
+    include './function/connect.php';
 
     $id_berita = $_GET['id_berita'];
     $sql = mysqli_query($koneksi, "DELETE FROM tb_berita WHERE id_berita = '$id_berita'");

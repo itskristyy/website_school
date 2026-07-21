@@ -1,5 +1,5 @@
 <?php
-include '../connect.php';
+include './function/connect.php';
 
 // import data
 $id = $_GET['id'];
