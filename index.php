@@ -412,9 +412,9 @@
                             <div class="invalid-feedback">Masukkan email yang valid.</div>
                         </div>
                         <div class="mb-4">
-                            <label for="pesan" class="form-label">Pesan</label>
-                            <textarea class="form-control rounded-0 border-0 border-bottom" id="pesan" name="pesan"
-                                rows="4" placeholder="Tuliskan pesan anda..." required></textarea>
+                            <label for="message" class="form-label">Pesan</label>
+                            <textarea class="form-control rounded-0 border-0 border-bottom" id="message" name="message"
+                                rows="4" placeholder="Tuliskan message anda..." required></textarea>
                             <div class="invalid-feedback">Pesan tidak boleh kosong.</div>
                         </div>
                         <button type="submit" class="btn fw-bold font-mono clip-diag btn-shadow text-uppercase"
